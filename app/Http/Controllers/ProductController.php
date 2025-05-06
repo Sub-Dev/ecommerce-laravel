@@ -14,6 +14,21 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
+    public function publicIndex(Request $request)
+    {
+        $query = Product::with('category');
+    
+        if ($request->has('category') && !empty($request->category)) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('name', $request->category);
+            });
+        }
+    
+        $products = $query->paginate(10);
+    
+        return view('products.public', compact('products'));
+    }
+
     public function create()
     {
         $categories = Category::all();
@@ -51,6 +66,7 @@ class ProductController extends Controller
         Product::destroy($id);
         return redirect()->route('products.index');
     }
+
 }
 
 
