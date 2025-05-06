@@ -12,33 +12,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Dashboard protegido (apenas logado e verificado)
+// Página de produtos pública
+Route::get('/produtos', [ProductController::class, 'publicIndex'])->name('products.public');
+
+// Dashboard (apenas logado e verificado)
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Rotas protegidas por autenticação
-Route::middleware('auth')->group(function () {
+// Rotas para usuários autenticados
+Route::middleware(['auth'])->group(function () {
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-    // Rotas para categorias
+// Rotas apenas para ADMIN
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('categories', CategoryController::class);
-
-    // Rotas para produtos
-    Route::resource('products', ProductController::class);
-
-    // Rotas para pedidos
+    Route::resource('products', ProductController::class)->except(['index']); // exceto a pública
     Route::resource('orders', OrderController::class);
-
-    // Rotas para itens do pedido
     Route::resource('order-items', OrderItemController::class);
-
-    // Rotas para pagamentos
     Route::resource('payments', PaymentController::class);
 });
 
-// Rotas de autenticação do Breeze (login, register, forgot password etc)
 require __DIR__.'/auth.php';
