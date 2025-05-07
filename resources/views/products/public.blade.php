@@ -33,9 +33,9 @@
 
                 <!-- Botão Comprar -->
                 <button
-                    class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition-colors"
-                    disabled
-                    title="Carrinho ainda não implementado">
+                    type="button"
+                    onclick="window.addToCart({{ $product->id }})"
+                    class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition-colors">
                     Comprar
                 </button>
             </div>
