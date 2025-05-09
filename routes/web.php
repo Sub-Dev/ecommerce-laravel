@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
 // Rotas apenas para ADMIN
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('categories', CategoryController::class);
-    Route::resource('products', ProductController::class)->except(['index']); // exceto a pública
+    Route::resource('products', ProductController::class); // exceto a pública
     Route::resource('orders', OrderController::class);
     Route::resource('order-items', OrderItemController::class);
     Route::resource('payments', PaymentController::class);
