@@ -28,8 +28,18 @@
             @endisset
 
             <!-- Button to toggle theme -->
-            <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded bg-gray-200 dark:bg-gray-800">
-                Toggle Dark Mode
+            <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                <!-- Ícone de Sol (modo claro) -->
+                <svg id="icon-sun" class="w-6 h-6 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m8.66-8.66l-.7.7M4.34 4.34l.7.7m12.02 12.02l.7.7M4.34 19.66l.7-.7M21 12h-1M4 12H3m9 3a3 3 0 100-6 3 3 0 000 6z" />
+                </svg>
+
+                <!-- Ícone de Lua (modo escuro) -->
+                <svg id="icon-moon" class="w-6 h-6 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                </svg>
             </button>
 
             <!-- Page Content -->
