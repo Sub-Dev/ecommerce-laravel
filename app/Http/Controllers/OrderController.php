@@ -9,10 +9,10 @@ class OrderController extends Controller
 {
     public function index()
     {
-        // Obtém todos os pedidos com os itens relacionados
-        $orders = Order::with('items')->get();
+        // Obtém os pedidos com os itens relacionados e aplica a paginação
+        $orders = Order::with('items')->paginate(10); // 10 pedidos por página
 
-        // Retorna a view 'orders.index' e passa os pedidos para ela
+        // Retorna a view 'orders.index' e passa os pedidos e a paginação para ela
         return view('orders.index', compact('orders'));
     }
 

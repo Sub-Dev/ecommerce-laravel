@@ -1,55 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Título da página -->
-        <h1 class="text-3xl font-semibold text-gray-800 dark:text-white mb-6">Categorias</h1>
+    <div class="max-w-6xl mx-auto mt-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Categorias</h1>
 
-        <!-- Mensagem de sucesso -->
+        <!-- Mensagem de Sucesso -->
         @if(session('success'))
-            <div class="bg-green-500 text-white p-4 rounded-lg mb-6">
+            <div class="alert alert-success mb-4 p-4 bg-green-100 dark:bg-green-700 text-green-800 dark:text-green-200 rounded-lg">
                 {{ session('success') }}
             </div>
         @endif
 
-        <!-- Botão de adicionar nova categoria -->
+        <!-- Botão Adicionar Categoria -->
         <a href="{{ route('categories.create') }}" 
-            class="mb-4 inline-block bg-blue-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+            class="mb-4 inline-block bg-blue-500 text-white py-2 px-6 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
             Adicionar Categoria
         </a>
 
-        <!-- Tabela de categorias -->
-        <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <table class="min-w-full text-sm text-left text-gray-500 dark:text-gray-300">
-                <thead class="bg-gray-100 dark:bg-gray-700">
+        <!-- Tabela de Categorias -->
+        <div class="overflow-x-auto shadow-md rounded-lg">
+            <table class="min-w-full bg-white dark:bg-gray-800 rounded-lg table-auto">
+                <thead>
                     <tr>
-                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">ID</th>
-                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Nome</th>
-                        <th class="px-6 py-4 font-medium text-gray-900 dark:text-white">Ações</th>
+                        <th class="px-4 py-2 text-left text-gray-800 dark:text-gray-100">ID</th>
+                        <th class="px-4 py-2 text-left text-gray-800 dark:text-gray-100">Nome</th>
+                        <th class="px-4 py-2 text-left text-gray-800 dark:text-gray-100">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($categories as $category)
-                        <tr class="border-b border-gray-200 dark:border-gray-600">
-                            <td class="px-6 py-4">{{ $category->id }}</td>
-                            <td class="px-6 py-4">{{ $category->name }}</td>
-                            <td class="px-6 py-4 space-x-2">
-                                <!-- Ver Categoria -->
+                        <tr class="border-t border-gray-300 dark:border-gray-600">
+                            <td class="px-4 py-2 text-gray-800 dark:text-gray-200">{{ $category->id }}</td>
+                            <td class="px-4 py-2 text-gray-800 dark:text-gray-200">{{ $category->name }}</td>
+                            <td class="px-4 py-2">
                                 <a href="{{ route('categories.show', $category->id) }}" 
-                                    class="inline-block text-blue-500 hover:text-blue-700">
+                                    class="inline-block bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
                                     Ver
                                 </a>
-                                <!-- Editar Categoria -->
                                 <a href="{{ route('categories.edit', $category->id) }}" 
-                                    class="inline-block text-yellow-500 hover:text-yellow-700">
+                                    class="inline-block ml-2 bg-yellow-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-75">
                                     Editar
                                 </a>
-                                <!-- Excluir Categoria -->
                                 <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" 
-                                        class="inline-block text-red-500 hover:text-red-700">
+                                        class="inline-block ml-2 bg-red-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75">
                                         Excluir
                                     </button>
                                 </form>
